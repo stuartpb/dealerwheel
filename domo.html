@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Domo Caption This Game</title>
+  <link rel="icon" type="image/png" href="domo-awake.png">
+  <style type="text/css">
+  .red-button {
+    -moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+    box-shadow:inset 0px 1px 0px 0px #f29c93;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+    background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+    background-color:#fe1a00;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #d83526;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #b23e35;
+  }
+  .red-button:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+    background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+    background-color:#ce0100;
+  }
+  .red-button:active {
+    position:relative;
+    top:1px;
+  }
+
+  #player-list {
+    float: right;
+  }
+  </style>
+  <script type="text/javascript">
+  function shuffle(v){
+    var len = v.length;
+    var i = len;
+    while (i--) {
+      var p = parseInt(Math.random()*len);
+      var t = v[i];
+        v[i] = v[p];
+        v[p] = t;
+    }
+    return v;
+  }
+
+  //The names of the players.
+  var names = []
+  //The players' scores.
+  var scores = []
+  //The order to present the captions in (randomized).
+  var order = []
+  //The players' captions for this round.
+  var captions = []
+  //The captions from each turn.
+  var turns = []
+  //The winners from each turn.
+  var winners = []
+  //The number of turns for each player to have had as rater.
+  var rounds
+
+  //Set the number of rounds (not implemented: just pay attention.)
+  function setRounds(){
+
+  }
+
+  //Updates the button name when a player is typing their name
+  function typingName(){
+
+  }
+
+  //Function called when pressing the "add player" button
+  function addPlayer(){
+    var inp = document.getElementById("text-input")
+    if inp.value == "" {
+      //we've got all the players: start the game
+      startGame()
+
+    } else {
+      names.push(inp.value)
+      scores.push(0)
+      order.push(names.length-1)
+    }
+  }
+
+  function startGame(){
+
+  }
+
+  function nextTurn(){
+
+  }
+
+  function addCaption(){
+
+  }
+
+  function award(player){
+
+  }
+  </script>
+</head>
+<body>
+  <div id="round-label" style="display: none;">
+    <span id="round-name">ROUND</span> <span id="round-no">0</span>.<span id="round-no">0</span>
+  </div>
+  <div id="player-list">
+  </div>
+
+  <div id="text-entry">
+    <input type="text" id="text-input"></input>
+    <a class="red-button" id="submit-text">Pass to your left...</a>
+  </div>
+
+
+</body>
+</html>
