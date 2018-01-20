@@ -10,43 +10,57 @@
   }
 
   button {
-    border-radius:6px;
+    border-radius:5px;
     border: 1px solid;
-    font-size:15px;
     font-weight:bold;
-    padding:6px 24px;
+    font-size: 13px;
+    padding: 5px 10px;
     text-decoration:none;
-    text-shadow:1px 1px 0px #b23e35;
-    -moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
-    -webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
-    box-shadow:inset 0px 1px 0px 0px #f29c93;
+    text-shadow: 0 -1px 1px hsla(0,0%,0%,0.25);
+    box-shadow: inset 0px 1px 0px 0px hsla(0,0%,100%,0.5);
+    display: inline-block;
+    background: -webkit-linear-gradient(top, hsla(0,0%,100%,0.1) 5%, hsla(0,0%,0%,0.2) 100% );
+    background: -moz-linear-gradient(top, hsla(0,0%,100%,0.1) 5%, hsla(0,0%,0%,0.2) 100% );
+    background: -ms-linear-gradient(top, hsla(0,0%,100%,0.1) 5%, hsla(0,0%,0%,0.2) 100% );
+    background: -o-linear-gradient(top, hsla(0,0%,100%,0.1) 5%, hsla(0,0%,0%,0.2) 100% );
+    background: linear-gradient(top, hsla(0,0%,100%,0.1) 5%, hsla(0,0%,0%,0.2) 100% );
+    border-color: hsla(0,0%,0%,0.25);
+  }
+
+  button:hover {
+    background: -webkit-linear-gradient(top, hsla(0,0%,100%,0.2) 5%, hsla(0,0%,0%,0.1) 100% );
+    background: -moz-linear-gradient(top, hsla(0,0%,100%,0.2) 5%, hsla(0,0%,0%,0.1) 100% );
+    background: -ms-linear-gradient(top, hsla(0,0%,100%,0.2) 5%, hsla(0,0%,0%,0.1) 100% );
+    background: -o-linear-gradient(top, hsla(0,0%,100%,0.2) 5%, hsla(0,0%,0%,0.1) 100% );
+    background: linear-gradient(top, hsla(0,0%,100%,0.2) 5%, hsla(0,0%,0%,0.1) 100% );
+  }
+
+  button:active {
+    background: -webkit-linear-gradient(top, hsla(0,0%,0%,0.2) 5%, hsla(0,0%,100%,0.1) 100% );
+    background: -moz-linear-gradient(top, hsla(0,0%,0%,0.2) 5%, hsla(0,0%,100%,0.1) 100% );
+    background: -ms-linear-gradient(top, hsla(0,0%,0%,0.2) 5%, hsla(0,0%,100%,0.1) 100% );
+    background: -o-linear-gradient(top, hsla(0,0%,0%,0.2) 5%, hsla(0,0%,100%,0.1) 100% );
+    background: linear-gradient(top, hsla(0,0%,0%,0.2) 5%, hsla(0,0%,100%,0.1) 100% );
+  }
+
+  button.big {
+    font-size:15px;
+    padding:6px 24px;
+  }
+
+  button.small {
+    font-size: 11px;
   }
 
   button.red {
-    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
-    background: linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
-    background-color:#fe1a00;
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
-    border-radius:6px;
-    border-color: #d83526;
-    display: inline-block;
-    color: #ffffff;
-  }
-  button.red:hover {
-    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff1900), color-stop(1, #e51600) );
-    background:-moz-linear-gradient( center top, #ff1900 5%, #e51600 100% );
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1900', endColorstr='#e51600');
-    background-color:#ff1900;
-  }
-  button.red:active {
-    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
-    background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
-    background-color:#ce0100;
+    background-color: hsl(6,100%,50%);
+    color: white;
   }
 
+  button.blue {
+    background-color: hsl(218,100%,50%);
+    color: white;
+  }
   .prompt {
   width: 80%;
   }
@@ -80,6 +94,15 @@
               .replace('"','&quot;');
   }
 
+  function hideById(id){
+    document.getElementById(id).style.display = "none";
+  }
+
+  function showById(id){
+    //yeah yeah yeah, I know, but I like it.
+    document.getElementById(id).style.display = null;
+  }
+
   //The minimum number of players.
   var minplayers = 3
 
@@ -96,7 +119,7 @@
   //The winners from each turn.
   var winners = []
   //The number of turns for each player to have had as rater.
-  var rounds
+  var rounds = 3
 
   //Set the number of rounds (not implemented: just pay attention.)
   function setRounds(){
@@ -104,13 +127,13 @@
   }
 
   function activatePPrompt(){
-    document.getElementById("text-entry").style.display = "none";
-    document.getElementById("player-prompt").style.display = "block";
+    hideById("text-entry")
+    showById("player-prompt")
   }
 
   function activateEntry(){
-    document.getElementById("player-prompt").style.display = "none";
-    document.getElementById("text-entry").style.display = "block";
+    hideById("player-prompt")
+    showById("text-entry")
   }
 
   //Function called when pressing the "add player" button
@@ -135,12 +158,12 @@
       var pt = document.getElementById("player-table")
       var pr = pt.insertRow(-1)
       var pname = pr.insertCell(-1)
-      pname.innerHTML = entify(name)
+      pname.innerText = name
       var pscore = pr.insertCell(-1)
-      pscore.innerHTML = "0"
+      pscore.innerText = "0"
 
       //Show the Backup button
-      document.getElementById("backup-button").style.display = null;
+      showById("backup-button")
 
       if(names.length >= minplayers){
         showStartGame()
@@ -166,13 +189,14 @@
     var pt = document.getElementById("player-table")
     pt.deleteRow(-1)
 
-    //If the first player was undone, hide the Backup button
+    //If the first player was undone,
     if(names.length == 0){
-      document.getElementById("backup-button").style.display = "none";
+      //hide the Backup button
+      hideById("backup-button")
     }
     //If there are now fewer players than needed to start the game
     else if(names.length < minplayers){
-      document.getElementById("start-game-prompt").style.display = "none";
+      hideById("start-game-prompt")
     }
 
     //advance, backward
@@ -180,55 +204,111 @@
   }
 
   function showStartGame(){
-    document.getElementById("if-this-is-p1").innerText="If this is " + names[0] + ":"
-    document.getElementById("start-game-prompt").style.display = null
+    document.getElementById("if-this-is-p1").innerText =
+      "If this has returned to " + names[0] + ":"
+    showById("start-game-prompt")
+  }
+
+  function score1for(playeri){
+    var score = ++scores[playeri];
+    var pt = document.getElementById("player-table")
+    pt.rows[playeri][1].innerText = score
+  }
+
+  function selectCaption(index){
+    var playeri = order[index]
+    score1for(playeri);
+
+    //TODO: present winning caption etc
   }
 
   function startGame(){
+    //populate the caption table
+    var ct = document.getElementById("caption-table")
+    for(i = 0; i < names.length; ++i)
+    {
+      var newrow = ct.insertRow(-1)
+      newrow.innerHTML = '<td></td><td><button class="red" onclick="selectCaption('+i+')">This one!</button></td>'
+    }
 
+    //Change the textEnter function to addCaption
+    textEnter = addCaption
+
+    nextTurn()
   }
 
   function nextTurn(){
-
+    document.getElementById("round-no").innerText = parseInt(turns.length/names.length) + 1
+    document.getElementById("round-turn").innerText = (turns.length % names.length) + 1
   }
 
   function addCaption(){
+    var inp = document.getElementById("text-input")
+    if (inp.value == "") {
+      //don't add blank captions.
+    } else {
+      //Save the player's caption
+      var cap = inp.value
 
-  }
+      //Clear the entry field for the next player
+      inp.value = ""
 
-  function award(player){
+      //Push this player's caption
+      captions.push(cap)
+
+      //Advance
+      activatePPrompt()
+    }
 
   }
 
   var textEnter = addPlayer
+
+  function newCaption(){
+    //Advance to text entry.
+    activateEntry()
+  }
+
   </script>
 </head>
 <body>
+
   <div id="scoreboard">
     <div id="round-counter">
-    <span id="round-name">ROUND</span> <span id="round-no">0</span>.<span id="round-turn">0</span>
+      <span id="round-name">ROUND</span> <span id="round-no">0</span>.<span id="round-turn">0</span>
     </div>
     <table id="player-table">
       <tbody>
       </tbody>
     </table>
   </div>
+
   <div class="prompt" id="player-prompt" style="display: none;">
     <p id="pass-left-prompt">Pass to your left.</p>
     <div id="player-buttons">
-      <p><button class="red" id="undo-player" onclick="undoPlayer()">Whoops! (Pass backward)</button></p>
-      <p><button class="red" id="new-player" onclick="newPlayer()">New Player</button></p></div>
-    <div id="start-game-prompt" style="display: none;"><p id="if-this-is-p1"></p>
-    <p><button class="red" id="finished-players" onclick="startGame()">Start Game</button></p></div>
-
+      <p><button class="small blue" id="undo-player" onclick="undoPlayer()">Whoops! (Pass backward)</button></p>
+      <p><button class="big red" id="new-player" onclick="newPlayer()">New Player</button></p>
+    </div>
+    <div id="start-game-prompt" style="display: none;">
+      <p id="if-this-is-p1"></p>
+      <p><button class="big red" id="finished-players" onclick="startGame()">Start Game</button></p>
+    </div>
   </div>
   <div class="prompt" id="text-entry">
     <p id="entry-prompt">Enter your name:</p>
     <p>
-    <input type="text" id="text-input" onkeypress="if (event.keyCode==13)textEnter()"></input>
-    <button class="red" id="submit-text" onclick="textEnter()">OK</button>
+    <input type="text" id="text-input" onkeypress="if (event.keyCode==13) textEnter()"></input>
+    <button class="big red" id="submit-text" onclick="textEnter()">OK</button>
     </p>
-    <p><button class="red" id="backup-button" onclick="activatePPrompt()" style="display: none;">Whoops! Passing backward</button></p>
+    <p><button class="small blue" id="backup-button" onclick="activatePPrompt()" style="display: none;">Whoops! Passing backward</button></p>
+  </div>
+  <div class="prompt" id="caption-selection">
+    <table id="caption-table">
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <div class="prompt" id="caption-winner">
   </div>
 
 
